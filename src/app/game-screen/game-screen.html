@@ -1,0 +1,64 @@
+<div class="screen">
+  <div class="background-decoration">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
+  </div>
+  
+  <div class="content-container">
+    <a class="back-btn" routerLink="/start">← Volver</a>
+    
+    <div class="game-header">
+      <div class="stat-badge">
+        <span class="stat-label">Tiempo</span>
+        <span class="stat-value">{{ timeRemaining }}</span>
+      </div>
+      
+      <div class="stat-badge">
+        <span class="stat-label">Clicks</span>
+        <span class="stat-value">{{ clickCount }}</span>
+      </div>
+    </div>
+    
+    <div class="game-area">
+      <div class="click-button-wrapper">
+        <div class="click-ripple" [class.active]="rippleActive"></div>
+        <button 
+          class="click-button" 
+          [class.disabled]="!gameActive"
+          (click)="handleClick()">
+          <span class="click-text">¡Click!</span>
+        </button>
+      </div>
+      
+      <div class="progress-bar-container">
+        <div class="progress-bar" [style.width.%]="progressPercentage"></div>
+      </div>
+    </div>
+    
+    <button 
+      *ngIf="!gameActive && !gameEnded" 
+      class="btn btn-primary btn-small" 
+      (click)="startGame()">
+      <span class="btn-text">Comenzar</span>
+    </button>
+  </div>
+</div>
+
+<!-- Game Over Modal -->
+<div class="modal" [class.active]="showModal">
+  <div class="modal-content">
+    <h2 class="modal-title">¡Tiempo Terminado!</h2>
+    <p class="modal-score">Conseguiste <span>{{ finalScore }}</span> clicks</p>
+    <p class="modal-message">{{ gameOverMessage }}</p>
+    
+    <div class="modal-buttons">
+      <button class="btn btn-primary" (click)="resetGame()">
+        <span class="btn-text">Jugar de Nuevo</span>
+      </button>
+      <a class="btn btn-secondary" routerLink="/start" (click)="closeModal()">
+        <span class="btn-text">Menú Principal</span>
+      </a>
+    </div>
+  </div>
+</div>

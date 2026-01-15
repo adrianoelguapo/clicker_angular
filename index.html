@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Click Master - Juego de Clicker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Start Screen -->
+    <div id="start-screen" class="screen active">
+      <div class="background-decoration">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+      </div>
+
+      <div class="content-container">
+        <div class="logo-section">
+          <h1 class="game-title">Click Master</h1>
+          <p class="game-subtitle">¡Demuestra tu velocidad!</p>
+        </div>
+
+        <div class="menu-buttons">
+          <button class="btn btn-primary" onclick="showScreen('game-screen')">
+            <span class="btn-text">Iniciar Juego</span>
+            <span class="btn-icon">🎮</span>
+          </button>
+
+          <button class="btn btn-secondary" onclick="showScreen('scores-screen')">
+            <span class="btn-text">Puntuaciones</span>
+            <span class="btn-icon">🏆</span>
+          </button>
+
+          <button class="btn btn-secondary" onclick="showScreen('instructions-screen')">
+            <span class="btn-text">Instrucciones</span>
+            <span class="btn-icon">📖</span>
+          </button>
+
+          <button class="btn btn-tertiary" onclick="exitGame()">
+            <span class="btn-text">Salir</span>
+            <span class="btn-icon">🚪</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-screen" class="screen">
+      <div class="background-decoration">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+      </div>
+
+      <div class="content-container">
+        <button class="back-btn" onclick="showScreen('start-screen')">← Volver</button>
+
+        <div class="game-header">
+          <div class="stat-badge">
+            <span class="stat-label">Tiempo</span>
+            <span class="stat-value" id="timer">30</span>
+          </div>
+
+          <div class="stat-badge">
+            <span class="stat-label">Clicks</span>
+            <span class="stat-value" id="click-count">0</span>
+          </div>
+        </div>
+
+        <div class="game-area">
+          <div class="click-button-wrapper">
+            <div class="click-ripple"></div>
+            <button id="click-button" class="click-button" onclick="handleClick()">
+              <span class="click-text">¡Click!</span>
+            </button>
+          </div>
+
+          <div class="progress-bar-container">
+            <div class="progress-bar" id="progress-bar"></div>
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-small" id="start-game-btn" onclick="startGame()">
+          <span class="btn-text">Comenzar</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Scores Screen -->
+    <div id="scores-screen" class="screen">
+      <div class="background-decoration">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+      </div>
+
+      <div class="content-container">
+        <button class="back-btn" onclick="showScreen('start-screen')">← Volver</button>
+
+        <div class="screen-header">
+          <h2 class="screen-title">🏆 Top Puntuaciones</h2>
+          <p class="screen-subtitle">Los mejores clickers</p>
+        </div>
+
+        <div class="scores-list">
+          <div class="score-item score-item-gold">
+            <div class="score-rank">1</div>
+            <div class="score-info">
+              <span class="score-name">Jugador 1</span>
+              <span class="score-date">15/01/2026</span>
+            </div>
+            <div class="score-points">245 clicks</div>
+          </div>
+
+          <div class="score-item score-item-silver">
+            <div class="score-rank">2</div>
+            <div class="score-info">
+              <span class="score-name">Jugador 2</span>
+              <span class="score-date">14/01/2026</span>
+            </div>
+            <div class="score-points">230 clicks</div>
+          </div>
+
+          <div class="score-item score-item-bronze">
+            <div class="score-rank">3</div>
+            <div class="score-info">
+              <span class="score-name">Jugador 3</span>
+              <span class="score-date">13/01/2026</span>
+            </div>
+            <div class="score-points">218 clicks</div>
+          </div>
+
+          <div class="score-item">
+            <div class="score-rank">4</div>
+            <div class="score-info">
+              <span class="score-name">Jugador 4</span>
+              <span class="score-date">12/01/2026</span>
+            </div>
+            <div class="score-points">201 clicks</div>
+          </div>
+
+          <div class="score-item">
+            <div class="score-rank">5</div>
+            <div class="score-info">
+              <span class="score-name">Jugador 5</span>
+              <span class="score-date">11/01/2026</span>
+            </div>
+            <div class="score-points">195 clicks</div>
+          </div>
+        </div>
+
+        <div class="info-box">
+          <p>💡 Conecta tu base de datos para guardar puntuaciones reales</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Instructions Screen -->
+    <div id="instructions-screen" class="screen">
+      <div class="background-decoration">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+      </div>
+
+      <div class="content-container">
+        <button class="back-btn" onclick="showScreen('start-screen')">← Volver</button>
+
+        <div class="screen-header">
+          <h2 class="screen-title">📖 Cómo Jugar</h2>
+          <p class="screen-subtitle">Es muy sencillo</p>
+        </div>
+
+        <div class="instructions-content">
+          <div class="instruction-card">
+            <div class="instruction-icon">⏱️</div>
+            <h3>Tiempo Limitado</h3>
+            <p>Tienes <strong>30 segundos</strong> para demostrar tu velocidad</p>
+          </div>
+
+          <div class="instruction-card">
+            <div class="instruction-icon">🖱️</div>
+            <h3>Haz Click</h3>
+            <p>Presiona el botón <strong>tantas veces como puedas</strong></p>
+          </div>
+
+          <div class="instruction-card">
+            <div class="instruction-icon">🏆</div>
+            <h3>Consigue Record</h3>
+            <p>Tu objetivo es superar el <strong>mayor número de clicks</strong></p>
+          </div>
+
+          <div class="instruction-card">
+            <div class="instruction-icon">💡</div>
+            <h3>Consejos</h3>
+            <p>Usa varios dedos y encuentra tu ritmo para maximizar clicks</p>
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-large" onclick="showScreen('game-screen')">
+          <span class="btn-text">¡Empezar a Jugar!</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Game Over Modal -->
+    <div id="game-over-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-icon">🎉</div>
+        <h2 class="modal-title">¡Tiempo Terminado!</h2>
+        <p class="modal-score">Conseguiste <span id="final-score">0</span> clicks</p>
+        <p class="modal-message" id="game-over-message"></p>
+
+        <div class="modal-buttons">
+          <button class="btn btn-primary" onclick="resetGame()">
+            <span class="btn-text">Jugar de Nuevo</span>
+          </button>
+          <button class="btn btn-secondary" onclick="closeModal()">
+            <span class="btn-text">Menú Principal</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
