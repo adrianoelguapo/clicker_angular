@@ -5,14 +5,18 @@ let win;
 
 function createWindow() {
   win = new BrowserWindow({
-    width: 1200,
-    height: 900,
+    width: 1024, // Tamaño base seguro
+    height: 768,
+    show: false, // 1. Ocultar inicialmente para evitar parpadeos
     webPreferences: {
-      nodeIntegration: false, // Por seguridad
-      contextIsolation: true, // Por seguridad
-      preload: path.join(__dirname, 'preload.js') // Opcional por ahora
+      nodeIntegration: false,
+      contextIsolation: true,
+      preload: path.join(__dirname, 'preload.js')
     }
   });
+
+  win.maximize();
+  win.show();
 
   // IMPORTANTE: Cargar el index.html compilado por Angular
   // Angular compila en dist/clicker_angular/browser/index.html
