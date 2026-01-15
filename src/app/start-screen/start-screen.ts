@@ -9,10 +9,7 @@ import { RouterModule } from '@angular/router';
 })
 export class StartScreen {
   exitGame() {
-    if (confirm('¿Estás seguro de que quieres salir del juego?')) {
-      alert('Gracias por jugar a Click Master! 👋');
-      // In Electron, you could use: window.close();
-    }
+    // Cerrar la aplicación directamente sin diálogos
+    window.close();
   }
 }
-

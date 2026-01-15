@@ -60,47 +60,7 @@ body {
   z-index: 10;
 }
 
-/* ===== Background Decorations ===== */
-.background-decoration {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: 1;
-  pointer-events: none;
-}
 
-.gradient-orb {
-  position: absolute;
-  border-radius: 50%;
-  opacity: 0.03;
-}
-
-.orb-1 {
-  width: 35vw;
-  height: 35vw;
-  background: var(--primary-orange);
-  top: -10vh;
-  right: -10vw;
-}
-
-.orb-2 {
-  width: 25vw;
-  height: 25vw;
-  background: var(--primary-orange);
-  bottom: -5vh;
-  left: -5vw;
-}
-
-.orb-3 {
-  width: 12vw;
-  height: 12vw;
-  background: var(--dark-gray);
-  top: 50%;
-  left: 30%;
-}
 
 /* ===== Start Screen ===== */
 .start-screen {
@@ -523,26 +483,50 @@ body {
     width: 18rem;
     height: 18rem;
     border-radius: 50%;
-    border: 2px solid var(--light-gray);
-    background: var(--primary-orange);
+    border: none;
+    background: linear-gradient(135deg, #FF6B35 0%, #FF8C42 50%, #FFA552 100%);
     color: var(--text-light);
-    font-size: 2rem;
-    font-weight: 600;
+    font-size: 2.2rem;
+    font-weight: 700;
     font-family: 'Poppins', sans-serif;
     cursor: pointer;
-    box-shadow: var(--shadow-md);
-    transition: all 0.15s ease;
+    box-shadow: 
+        0 10px 30px rgba(255, 107, 53, 0.4),
+        0 5px 15px rgba(255, 107, 53, 0.3),
+        inset 0 -5px 15px rgba(0, 0, 0, 0.1),
+        inset 0 5px 15px rgba(255, 255, 255, 0.2);
+    transition: all 0.2s ease;
     position: relative;
     z-index: 5;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.click-button::before {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 40%;
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(10px);
 }
 
 .click-button:hover:not(.disabled) {
-  transform: scale(1.02);
-  background: #e85e2c;
+  transform: scale(1.05);
+  box-shadow: 
+    0 15px 40px rgba(255, 107, 53, 0.5),
+    0 8px 20px rgba(255, 107, 53, 0.4),
+    inset 0 -5px 15px rgba(0, 0, 0, 0.1),
+    inset 0 5px 15px rgba(255, 255, 255, 0.3);
 }
 
 .click-button:active:not(.disabled) {
-  transform: scale(0.98);
+  transform: scale(0.95);
+  box-shadow: 
+    0 5px 15px rgba(255, 107, 53, 0.3),
+    inset 0 5px 20px rgba(0, 0, 0, 0.2);
 }
 
 .click-button.disabled {
@@ -595,87 +579,105 @@ body {
 /* ===== Scores Screen ===== */
 .screen-header {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     animation: fadeInUp 0.6s ease 0.2s backwards;
 }
 
 .screen-title {
-    font-size: 2.5rem;
+    font-size: 1.8rem;
     font-weight: 700;
     color: var(--dark-gray);
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.3rem;
 }
 
 .screen-subtitle {
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   color: var(--medium-gray);
 }
 
 .scores-list {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 2rem;
+  gap: 0.7rem;
+  margin-bottom: 1rem;
   animation: fadeInUp 0.6s ease 0.4s backwards;
 }
 
 .score-item {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  gap: 1.5rem;
-  padding: 1.5rem 2rem;
-  background: #ffffff;
+  gap: 1.2rem;
+  padding: 0.8rem 1.2rem;
+  background: white;
   border-radius: var(--border-radius);
-  border: 1px solid var(--light-gray);
-  transition: var(--transition);
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .score-item:hover {
-  border-color: var(--medium-gray);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  border-color: var(--primary-orange);
 }
 
-.score-item-gold,
-.score-item-silver,
+.score-item-gold {
+  background: linear-gradient(135deg, #FFF9E6 0%, #FFFFFF 100%);
+  border-color: #FFD700;
+}
+
+.score-item-silver {
+  background: linear-gradient(135deg, #F5F5F5 0%, #FFFFFF 100%);
+  border-color: #C0C0C0;
+}
+
 .score-item-bronze {
-  background: #fafafa;
+  background: linear-gradient(135deg, #FFF4E6 0%, #FFFFFF 100%);
+  border-color: #CD7F32;
 }
 
 .score-rank {
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   font-weight: 800;
   color: var(--primary-orange);
-  min-width: 3.5rem;
+  min-width: 2.5rem;
   text-align: center;
 }
 
 .score-info {
   flex: 1;
-  display: flex;
-  flex-direction: column;
 }
 
 .score-name {
-  font-size: 1.4rem;
+  font-size: 1.1rem;
   font-weight: 600;
   color: var(--text-dark);
-}
-
-.score-date {
-  font-size: 0.9rem;
-  color: var(--text-dark);
-  opacity: 0.6;
 }
 
 .score-points {
-  font-size: 1.8rem;
-  font-weight: 600;
+  font-size: 1.6rem;
+  font-weight: 700;
   color: var(--primary-orange);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1;
+}
+
+.points-label {
+  font-size: 0.65rem;
+  font-weight: 400;
+  color: var(--medium-gray);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 0.2rem;
 }
 
 .info-box {
-  background: #f5f5f5;
+  background: linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%);
   border: 1px solid var(--light-gray);
-  padding: 1.25rem;
+  padding: 0.8rem;
   border-radius: var(--border-radius);
   text-align: center;
   animation: fadeInUp 0.6s ease 0.6s backwards;
@@ -684,20 +686,21 @@ body {
 .info-box p {
   color: var(--medium-gray);
   font-weight: 400;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  margin: 0;
 }
 
 /* ===== Instructions Screen ===== */
 .instructions-content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .instruction-card {
   background: #ffffff;
-  padding: 2rem;
+  padding: 1.5rem;
   border-radius: var(--border-radius);
   text-align: center;
   border: 1px solid var(--light-gray);
@@ -721,15 +724,23 @@ body {
   animation-delay: 0.7s;
 }
 
+.instruction-card:nth-child(5) {
+  animation-delay: 0.8s;
+}
+
+.instruction-card:nth-child(6) {
+  animation-delay: 0.9s;
+}
+
 .instruction-card:hover {
   border-color: var(--medium-gray);
 }
 
 .instruction-card h3 {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   font-weight: 600;
   color: var(--dark-gray);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.6rem;
 }
 
 .instruction-card p {
@@ -858,10 +869,38 @@ body {
   }
 
   .click-button {
-    width: 250px;
-    height: 250px;
-    font-size: 2rem;
-  }
+    width: 18rem;
+    height: 18rem;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(135deg, #FF6B35 0%, #FF8C42 50%, #FFA552 100%);
+    color: var(--text-light);
+    font-size: 2.2rem;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    box-shadow: 
+        0 10px 30px rgba(255, 107, 53, 0.4),
+        0 5px 15px rgba(255, 107, 53, 0.3),
+        inset 0 -5px 15px rgba(0, 0, 0, 0.1),
+        inset 0 5px 15px rgba(255, 255, 255, 0.2);
+    transition: all 0.2s ease;
+    position: relative;
+    z-index: 5;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.click-button::before {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 40%;
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(10px);
+}
 
   .stat-value {
     font-size: 2.5rem;
@@ -882,8 +921,37 @@ body {
   }
 
   .click-button {
-    width: 200px;
-    height: 200px;
-    font-size: 1.8rem;
-  }
+    width: 18rem;
+    height: 18rem;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(135deg, #FF6B35 0%, #FF8C42 50%, #FFA552 100%);
+    color: var(--text-light);
+    font-size: 2.2rem;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    box-shadow: 
+        0 10px 30px rgba(255, 107, 53, 0.4),
+        0 5px 15px rgba(255, 107, 53, 0.3),
+        inset 0 -5px 15px rgba(0, 0, 0, 0.1),
+        inset 0 5px 15px rgba(255, 255, 255, 0.2);
+    transition: all 0.2s ease;
+    position: relative;
+    z-index: 5;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
+
+.click-button::before {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 40%;
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(10px);
+}
+}
+
