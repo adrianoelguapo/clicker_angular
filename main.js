@@ -4,15 +4,20 @@ const path = require('path');
 let win;
 
 function createWindow() {
+
   win = new BrowserWindow({
-    width: 1024, // Tamaño base seguro
+
+    width: 1024,
     height: 768,
-    show: false, // 1. Ocultar inicialmente para evitar parpadeos
+    show: false,
     webPreferences: {
+
       nodeIntegration: false,
       contextIsolation: true,
       preload: path.join(__dirname, 'preload.js')
+
     }
+
   });
 
   win.maximize();
@@ -24,24 +29,32 @@ function createWindow() {
   
   win.loadFile(distPath);
 
-  // Abrir herramientas de desarrollo (DevTools)
-  // win.webContents.openDevTools();
-
   win.on('closed', () => {
+
     win = null;
+
   });
+
 }
 
 app.on('ready', createWindow);
 
 app.on('window-all-closed', () => {
+
   if (process.platform !== 'darwin') {
+
     app.quit();
+
   }
+
 });
 
 app.on('activate', () => {
+
   if (win === null) {
+
     createWindow();
+
   }
+
 });

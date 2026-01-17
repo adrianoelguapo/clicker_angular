@@ -65,15 +65,15 @@ export class GameScreen implements OnDestroy {
     
     // Generate message based on performance
     if (this.clickCount >= 200) {
-      this.gameOverMessage = '¡Increíble! ¡Eres un maestro del click! 🏆';
+      this.gameOverMessage = '¡Increíble! ¡Eres un maestro del click!';
     } else if (this.clickCount >= 150) {
-      this.gameOverMessage = '¡Excelente! ¡Tienes dedos veloces! 🔥';
+      this.gameOverMessage = '¡Excelente! ¡Tienes dedos veloces!';
     } else if (this.clickCount >= 100) {
-      this.gameOverMessage = '¡Muy bien! ¡Sigue practicando! 💪';
+      this.gameOverMessage = '¡Muy bien! ¡Sigue practicando!';
     } else if (this.clickCount >= 50) {
-      this.gameOverMessage = '¡Buen intento! ¡Puedes mejorar! 👍';
+      this.gameOverMessage = '¡Buen intento! ¡Puedes mejorar!';
     } else {
-      this.gameOverMessage = '¡No te rindas! ¡Inténtalo de nuevo! 😊';
+      this.gameOverMessage = '¡No te rindas! ¡Inténtalo de nuevo!';
     }
     
     this.showModal = true;

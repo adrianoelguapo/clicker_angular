@@ -197,15 +197,15 @@ function showGameOverModal() {
     // Generate message based on performance
     let message = '';
     if (gameState.clickCount >= 200) {
-        message = '¡Increíble! ¡Eres un maestro del click! 🏆';
+        message = '¡Increíble! ¡Eres un maestro del click! ';
     } else if (gameState.clickCount >= 150) {
-        message = '¡Excelente! ¡Tienes dedos veloces! 🔥';
+        message = '¡Excelente! ¡Tienes dedos veloces! ';
     } else if (gameState.clickCount >= 100) {
-        message = '¡Muy bien! ¡Sigue practicando! 💪';
+        message = '¡Muy bien! ¡Sigue practicando! ';
     } else if (gameState.clickCount >= 50) {
-        message = '¡Buen intento! ¡Puedes mejorar! 👍';
+        message = '¡Buen intento! ¡Puedes mejorar! ';
     } else {
-        message = '¡No te rindas! ¡Inténtalo de nuevo! 😊';
+        message = '¡No te rindas! ¡Inténtalo de nuevo! ';
     }
     
     messageElement.textContent = message;
@@ -262,5 +262,5 @@ document.addEventListener('DOMContentLoaded', () => {
     const clickButton = document.getElementById('click-button');
     clickButton.classList.add('disabled');
     
-    console.log('Click Master cargado correctamente! 🎮');
+    console.log('Click Master cargado correctamente! ');
 });
