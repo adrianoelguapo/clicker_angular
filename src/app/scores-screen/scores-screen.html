@@ -1,0 +1,67 @@
+<!-- --- Contenedor principal --- -->
+<div class = "screen">
+
+  <!-- --- Contenedor de contenido --- -->
+  <div class = "content-container">
+
+    <!-- --- Botón para volver de vuelta al menú principal --- -->
+    <a class = "back-btn" routerLink = "/start">← Back</a>
+    
+    <!-- --- Encabezado de la vista --- -->
+    <div class = "screen-header">
+
+      <!-- --- Título --- -->
+      <h2 class = "screen-title">Top Scores</h2>
+      
+      <!-- --- Subtítulo --- -->
+      <p class = "screen-subtitle">Best clickers</p>
+
+    </div>
+    
+    <!-- --- Lista de puntuaciones --- -->
+    <div class = "scores-list">
+
+      <!-- --- Si las puntuaciones aún no se han cargado se muestra un mensaje --- -->
+      @if (loading) {
+
+        <!-- --- Mensaje de que las puntuaciones se están cargando --- -->
+        <p style = "text-align: center; color: #666; margin: 2rem 0;">Loading scores...</p>
+
+      } @else if (error || scores.length === 0) {
+
+        <!-- --- Mensaje de que no hay puntuaciones que se muestra si no hay puntuaciones en la bbdd --- -->
+        <p style = "text-align: center; color: #666; margin: 2rem 0;">No scores yet. Be the first to play!</p>
+
+      } @else {
+
+        <!-- --- Si hay al menos una puntuación se recorre el array de puntuaciones para crear tarjetas --- -->
+        @for (score of scores; track score.score_id; let i  =  $index) {
+
+          <!-- --- Tarjeta de puntuación --- -->
+          <div class = "score-item" [class] = "getMedalClass(i)">
+
+            <!-- --- Posición en el ranking --- -->
+            <div class = "score-rank">{{ i + 1 }}</div>
+            
+            <!-- --- Información del jugador --- -->
+            <div class = "score-info">
+
+              <!-- --- Nombre --- -->
+              <span class = "score-name">{{ score.name }}</span>
+
+            </div>
+
+            <!-- --- Puntuación --- -->
+            <div class = "score-points">{{ score.clicks }}<span class = "points-label">clicks</span></div>
+
+          </div>
+
+        }
+
+      }
+
+    </div>
+
+  </div>
+
+</div>

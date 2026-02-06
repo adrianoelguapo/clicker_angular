@@ -1,0 +1,124 @@
+<!-- --- Contenedor principal de la vista --- -->
+<div class = "screen">
+
+  <!-- --- Contenedor del contenido --- -->
+  <div class = "content-container">
+
+    <!-- --- Botón para volver  --- -->
+    <a class = "back-btn" routerLink = "/start">Back</a>
+    
+    <!-- --- Header de la vista --- -->
+    <div class = "game-header">
+
+      <!-- --- Contenedor para el crono --- -->
+      <div class = "stat-badge">
+
+        <!-- --- Label --- -->
+        <span class = "stat-label">Time</span>
+
+        <!-- --- Tiempo restante --- -->
+        <span class = "stat-value">{{ timeRemaining }}</span>
+
+      </div>
+      
+      <!-- --- Contenedor para el contador de clicks --- -->
+      <div class = "stat-badge">
+
+        <!-- --- Label --- -->
+        <span class = "stat-label">Clicks</span>
+
+        <!-- --- Cantidad de clicks --- -->
+        <span class = "stat-value">{{ clickCount }}</span>
+
+      </div>
+
+    </div>
+    
+    <!-- --- Contenedor de la sección del botón de click --- -->
+    <div class = "game-area">
+
+      <!-- --- Contenedor del botón de click --- -->
+      <div class = "click-button-wrapper">
+
+        <!-- --- Contenedor auxiliar para aplicar el efecto de encoger el botón al hacer click en el botón --- -->
+        <div class = "click-ripple" [class.active] = "rippleActive"></div>
+
+        <!-- --- Botón de click --- -->
+        <button class = "click-button" [class.disabled] = "!gameActive" (click) = "handleClick()"></button>
+
+      </div>
+
+    </div>
+    
+    <!-- --- Botón para empezar la partida que solo está activo si el juego no ha comenzado y no ha terminado --- -->
+    <button *ngIf = "!gameActive && !gameEnded" class = "btn btn-primary btn-small" (click) = "startGame()">
+
+      <!-- --- Texto del botón --- -->
+      <span class = "btn-text">Start</span>
+
+    </button>
+    
+  </div>
+
+</div>
+
+<!-- --- Modal de fin de partida --- -->
+<div class = "modal" [class.active] = "showModal">
+
+  <!-- --- Contenedor del modal --- -->
+  <div class = "modal-content">
+
+    <!-- --- Título del modal --- -->
+    <h2 class = "modal-title">Time's Up!</h2>
+    
+    <!-- --- Puntuación final --- -->
+    <p class = "modal-score">You got <span>{{ finalScore }}</span> clicks</p>
+    
+    <!-- --- Mensaje de fin de partida --- -->
+    <p class = "modal-message">{{ gameOverMessage }}</p>
+    
+    <!-- --- Input para el nombre del jugador --- -->
+    <div style = "margin: 1.5rem 0;">
+
+      <!-- --- Nombre del jugador --- -->
+      <input type = "text" [(ngModel)] = "playerName" class = "player-name-input" placeholder = "Enter your name to save" maxlength = "20" style = "width: 100%; padding: 0.75rem; font-size: 1rem; border: 2px solid #d8cef0; border-radius: 12px; background: rgba(255,255,255,0.9); color: #2d2d2d; text-align: center;"/>
+
+    </div>
+    
+    <!-- --- Botones del modal --- -->
+    <div class = "modal-buttons" style = "flex-direction: column; gap: 0.75rem;">
+
+      <!-- --- Botón para guardar la puntuación --- -->
+      <a class = "btn btn-primary" routerLink = "/start" (click) = "saveAndGoToMenu()" [class.disabled] = "!playerName || !playerName.trim()" [style.pointer-events] = "!playerName || !playerName.trim() ? 'none' : 'auto'" [style.opacity] = "!playerName || !playerName.trim() ? '0.5' : '1'" style = "width: 100%; text-decoration: none;">
+
+        <!-- --- Texto del botón --- -->
+        <span class = "btn-text">Save Score</span>
+
+      </a>
+      
+      <!-- --- Botones de la segunda fila --- -->
+      <div style = "display: flex; gap: 0.75rem; width: 100%;">
+
+        <!-- --- Botón para jugar de nuevo --- -->
+        <button class = "btn btn-secondary" (click) = "resetGameWithoutSaving()" style = "flex: 1;">
+
+          <!-- --- Texto del botón --- -->
+          <span class = "btn-text">Play Again</span>
+
+        </button>
+
+        <!-- --- Botón para volver al menú --- -->
+        <a class = "btn btn-tertiary" routerLink = "/start" (click) = "closeModalWithoutSaving()" style = "flex: 1; text-decoration: none;">
+
+          <!-- --- Texto del botón --- -->
+          <span class = "btn-text">Menu</span>
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
